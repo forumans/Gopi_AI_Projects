@@ -21,3 +21,7 @@ pandas
 chromadb
 price_parser
 gradio
+pdfkit
+crewai>=1.9.0
+crewai-tools
+yfinance

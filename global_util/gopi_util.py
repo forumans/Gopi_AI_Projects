@@ -9,9 +9,23 @@ env_path = os.path.join(os.path.dirname(__file__), '.env')
 #print(f"Loading .env from: {env_path}")
 dotenv.load_dotenv(env_path)
 
-api_key = os.getenv("GOPI_OPENAI_API_KEY")
+api_key = os.getenv("OPENAI_API_KEY")
 #print(f"API Key loaded: {api_key[:10] if api_key else 'None'}")
 model_name = "gpt-3.5-turbo"
+
+# Get OpenAI API key
+def get_openai_api_key():
+    return api_key
+
+# Get Google API key
+def get_google_api_key():
+    return os.getenv("GOOGLE_API_KEY")
+
+# Get HuggingFace API key
+def get_huggingface_api_key():
+    return os.getenv("HUGGINGFACE_API_KEY")
+
+
 
 # Creates an LLM object and returns it
 def get_llm():
