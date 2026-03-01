@@ -8,7 +8,7 @@ import os
 # Add src to path for imports
 sys.path.insert(0, os.path.join(os.getcwd(), 'src'))
 
-from app import create_ui
+from financial_app import create_ui
 
 if __name__ == "__main__":
     print("🚀 Starting Financial Analysis System...")

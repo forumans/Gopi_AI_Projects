@@ -45,9 +45,9 @@ notepad .env
 
 ```
 phidata_multi_agent_app/
-├── app.py                  # Main entry point
+├── main.py                  # Main entry point (was app.py)
 ├── src/
-│   └── app.py             # Complete application
+│   └── financial_app.py     # Complete application (was app.py)
 ├── unit_test/              # Unit tests
 │   ├── test_financial_analysis.py
 │   └── run_tests.py
@@ -64,13 +64,36 @@ phidata_multi_agent_app/
 ├── .gitignore           # Git ignore rules
 └── .env                 # Environment variables
 ```
+
+## 📁 File Structure Changes (2026-03-01)
+
+### **Renamed Files:**
+- **`app.py` → `main.py`** (root directory)
+  - Purpose: Main entry point/launcher
+  - Clear distinction from application logic
+  
+- **`src/app.py` → `src/financial_app.py`**
+  - Purpose: Core financial analysis application
+  - Descriptive name reflecting functionality
+
+### **Benefits:**
+- ✅ **No duplicate names** - Clear file identification
+- ✅ **Self-documenting** - Names indicate purpose
+- ✅ **Better maintainability** - Easier navigation
+- ✅ **Professional structure** - Follows Python conventions
+
+### **Updated Import:**
+```python
+# In main.py
+from financial_app import create_ui
+```
 ## Create a Mermaid diagram for the project structure
 
 ```mermaid
 graph TD
-    A[phidata_multi_agent_app] --> B[app.py]
+    A[phidata_multi_agent_app] --> B[main.py]
     A --> C[src]
-    C --> D[app.py]
+    C --> D[financial_app.py]
     A --> E[unit_test]
     E --> F[test_financial_analysis.py]
     E --> G[run_tests.py]
@@ -96,7 +119,7 @@ graph TD
 ### 1. Local Development
 ```bash
 # Start the application
-python app.py
+python main.py
 
 # Access at http://localhost:7860
 ```
@@ -151,7 +174,7 @@ git commit -m "feat: add new feature with tests"
 
 #### Step 2: Implementation
 ```python
-# Modify src/app.py
+# Modify src/financial_app.py
 # Add new function or modify existing
 # Follow existing patterns and style
 ```
@@ -209,7 +232,7 @@ print(response.status_code)
 ```bash
 # Enable debug mode
 export DEBUG=true
-python app.py
+python main.py
 ```
 
 ## 🧪 Testing in Development
@@ -257,7 +280,7 @@ docker-compose logs financial-analysis-app
 
 ### Core Components
 
-#### `src/app.py`
+#### `src/financial_app.py`
 - **web_search()**: DuckDuckGo integration
 - **get_stock_data()**: Yahoo Finance data with 52-week & YTD
 - **get_stock_news()**: News article retrieval
