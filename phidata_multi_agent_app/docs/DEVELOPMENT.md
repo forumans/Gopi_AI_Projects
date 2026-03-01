@@ -87,10 +87,6 @@ graph TD
     A --> R[.gitignore]
     A --> S[.env]
 
-## Project Structure Diagram
-![alt text](<phidata Multi-Agent App-2026-03-01-035745.png>)
-
-
 ## 🧪 Development Workflow
 
 ### 1. Local Development
