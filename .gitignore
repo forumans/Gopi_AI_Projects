@@ -35,7 +35,7 @@ wheels/
 venv/
 ENV/
 windsurf_py311_venv/
-
+.myenv_py_3_10/
 
 # IDE
 .vscode/

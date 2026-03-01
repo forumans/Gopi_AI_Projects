@@ -1,8 +1,0 @@
-phidata
-openai
-duckduckgo-search
-yfinance
-newspaper4k
-python-dotenv
-lancedb
-sqlalchemy
