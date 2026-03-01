@@ -11,7 +11,7 @@ from unittest.mock import patch, MagicMock
 # Add src to path for imports
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-from app import web_search, get_stock_data, get_stock_news
+from financial_app import web_search, get_stock_data, get_stock_news
 
 class TestFinancialAnalysis(unittest.TestCase):
     """Test suite for Financial Analysis System"""
@@ -23,7 +23,7 @@ class TestFinancialAnalysis(unittest.TestCase):
     
     def test_web_search_success(self):
         """Test successful web search"""
-        with patch('app.DDGS') as mock_ddgs:
+        with patch('financial_app.DDGS') as mock_ddgs:
             # Mock DuckDuckGo response
             mock_result = MagicMock()
             mock_result.get.side_effect = lambda key, default="": {
@@ -44,7 +44,7 @@ class TestFinancialAnalysis(unittest.TestCase):
     
     def test_web_search_no_results(self):
         """Test web search with no results"""
-        with patch('app.DDGS') as mock_ddgs:
+        with patch('financial_app.DDGS') as mock_ddgs:
             mock_ddgs.return_value.__enter__.return_value.text.return_value = []
             
             result = web_search(self.test_query)
@@ -55,7 +55,7 @@ class TestFinancialAnalysis(unittest.TestCase):
     
     def test_web_search_exception(self):
         """Test web search with exception"""
-        with patch('app.DDGS') as mock_ddgs:
+        with patch('financial_app.DDGS') as mock_ddgs:
             mock_ddgs.side_effect = Exception("Connection error")
             
             result = web_search(self.test_query)
@@ -66,7 +66,7 @@ class TestFinancialAnalysis(unittest.TestCase):
     
     def test_get_stock_data_success(self):
         """Test successful stock data retrieval"""
-        with patch('app.yf.Ticker') as mock_ticker:
+        with patch('financial_app.yf.Ticker') as mock_ticker:
             # Mock Yahoo Finance response
             mock_info = {
                 'currentPrice': 182.52,
@@ -110,7 +110,7 @@ class TestFinancialAnalysis(unittest.TestCase):
     
     def test_get_stock_data_no_price(self):
         """Test stock data with no current price"""
-        with patch('app.yf.Ticker') as mock_ticker:
+        with patch('financial_app.yf.Ticker') as mock_ticker:
             mock_stock = MagicMock()
             mock_stock.info = {'currentPrice': None}
             mock_ticker.return_value = mock_stock
@@ -123,7 +123,7 @@ class TestFinancialAnalysis(unittest.TestCase):
     
     def test_get_stock_data_exception(self):
         """Test stock data with exception"""
-        with patch('app.yf.Ticker') as mock_ticker:
+        with patch('financial_app.yf.Ticker') as mock_ticker:
             mock_ticker.side_effect = Exception("API error")
             
             result = get_stock_data(self.test_symbol)
@@ -134,7 +134,7 @@ class TestFinancialAnalysis(unittest.TestCase):
     
     def test_get_stock_news_success(self):
         """Test successful stock news retrieval"""
-        with patch('app.yf.Ticker') as mock_ticker:
+        with patch('financial_app.yf.Ticker') as mock_ticker:
             # Mock news response
             mock_news = [
                 {
@@ -167,7 +167,7 @@ class TestFinancialAnalysis(unittest.TestCase):
     
     def test_get_stock_news_no_articles(self):
         """Test stock news with no articles"""
-        with patch('app.yf.Ticker') as mock_ticker:
+        with patch('financial_app.yf.Ticker') as mock_ticker:
             mock_stock = MagicMock()
             mock_stock.news = []
             mock_ticker.return_value = mock_stock
@@ -180,7 +180,7 @@ class TestFinancialAnalysis(unittest.TestCase):
     
     def test_get_stock_news_exception(self):
         """Test stock news with exception"""
-        with patch('app.yf.Ticker') as mock_ticker:
+        with patch('financial_app.yf.Ticker') as mock_ticker:
             mock_ticker.side_effect = Exception("News API error")
             
             result = get_stock_news(self.test_symbol)
@@ -191,7 +191,7 @@ class TestFinancialAnalysis(unittest.TestCase):
     
     def test_get_stock_news_invalid_articles(self):
         """Test stock news with invalid articles (no title/publisher)"""
-        with patch('app.yf.Ticker') as mock_ticker:
+        with patch('financial_app.yf.Ticker') as mock_ticker:
             # Mock news with invalid articles
             mock_news = [
                 {'title': '', 'publisher': 'Reuters', 'summary': 'Valid article'},
@@ -215,13 +215,13 @@ class TestFinancialAnalysis(unittest.TestCase):
     def test_input_validation(self):
         """Test input validation for edge cases"""
         # Test empty inputs
-        with patch('app.DDGS') as mock_ddgs:
+        with patch('financial_app.DDGS') as mock_ddgs:
             mock_ddgs.return_value.__enter__.return_value.text.return_value = []
             
             result = web_search("")
             self.assertIn("No results found", result)
         
-        with patch('app.yf.Ticker') as mock_ticker:
+        with patch('financial_app.yf.Ticker') as mock_ticker:
             mock_stock = MagicMock()
             mock_stock.info = {'currentPrice': None}
             mock_ticker.return_value = mock_stock
@@ -231,7 +231,7 @@ class TestFinancialAnalysis(unittest.TestCase):
     
     def test_output_formatting(self):
         """Test that outputs are properly formatted"""
-        with patch('app.DDGS') as mock_ddgs:
+        with patch('financial_app.DDGS') as mock_ddgs:
             mock_result = MagicMock()
             mock_result.get.side_effect = lambda key, default="": {
                 "title": "Test Result",
@@ -255,7 +255,7 @@ class TestIntegration(unittest.TestCase):
     
     def test_symbol_case_insensitivity(self):
         """Test that stock symbols work regardless of case"""
-        with patch('app.yf.Ticker') as mock_ticker:
+        with patch('financial_app.yf.Ticker') as mock_ticker:
             mock_stock = MagicMock()
             mock_stock.info = {'currentPrice': 100.0}
             mock_stock.history.return_value = MagicMock()
@@ -274,7 +274,7 @@ class TestIntegration(unittest.TestCase):
     
     def test_error_message_consistency(self):
         """Test that error messages follow consistent format"""
-        with patch('app.DDGS') as mock_ddgs:
+        with patch('financial_app.DDGS') as mock_ddgs:
             mock_ddgs.side_effect = Exception("Test error")
             
             result = web_search("test")

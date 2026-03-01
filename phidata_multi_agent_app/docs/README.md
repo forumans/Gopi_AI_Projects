@@ -15,9 +15,9 @@ E2E tests verify that the complete user workflow functions correctly from the br
 
 ```
 phidata_multi_agent_app/
-├── app.py                  # Main entry point
+├── main.py                  # Main entry point (was app.py)
 ├── src/
-│   └── app.py             # Complete application
+│   └── financial_app.py     # Complete application (was app.py)
 ├── unit_test/              # Unit tests
 │   ├── test_financial_analysis.py    # Comprehensive unit tests
 │   └── run_tests.py               # Quick test runner
@@ -67,7 +67,7 @@ pip install pytest-playwright
 ### Environment Setup
 1. **Start Application Server:**
    ```bash
-   python app.py
+   python main.py
    ```
 
 2. **Verify Server Running:**
@@ -169,7 +169,7 @@ python test_ui_end_to_end.py
 #### **Server Not Running**
 ```
 ❌ Server not running on http://localhost:7860
-💡 Start the server first: python app.py
+💡 Start the server first: python main.py
 ```
 **Solution**: Start the application server before running tests
 

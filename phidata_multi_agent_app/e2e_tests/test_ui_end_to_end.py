@@ -308,7 +308,7 @@ class TestRunner:
         # Check if server is running
         if not self.check_server_running():
             print("❌ Server not running on http://localhost:7860")
-            print("💡 Start the server first: python app.py")
+            print("💡 Start the server first: python main.py")
             return False
         
         test_results = []

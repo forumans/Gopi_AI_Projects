@@ -45,9 +45,9 @@ notepad .env
 
 ```
 phidata_multi_agent_app/
-├── app.py                  # Main entry point
+├── main.py                  # Main entry point (was app.py)
 ├── src/
-│   └── app.py             # Complete application
+│   └── financial_app.py     # Complete application (was app.py)
 ├── unit_test/              # Unit tests
 │   ├── test_financial_analysis.py
 │   └── run_tests.py
@@ -96,7 +96,7 @@ graph TD
 ### 1. Local Development
 ```bash
 # Start the application
-python app.py
+python main.py
 
 # Access at http://localhost:7860
 ```
@@ -209,7 +209,7 @@ print(response.status_code)
 ```bash
 # Enable debug mode
 export DEBUG=true
-python app.py
+python main.py
 ```
 
 ## 🧪 Testing in Development
