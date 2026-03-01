@@ -1,0 +1,45 @@
+stock_price_task:
+  description: >
+    Get the name of the stock {stock} and get the latest stock price for it.
+  expected_output: >
+    Stock symbol and current price for {stock}
+  agent: stock_price_analyst
+
+
+stock_news_task:
+  description: >
+    Get the latest stock news for {stock}
+    Make sure you find any interesting and relevant information given the current year is {current_year}.
+  expected_output: >
+    A list with 10 bullet points of the most relevant information about {stock}
+  agent: stock_news_analyst
+
+
+research_task:
+  description: >
+    Conduct a thorough research about {topic} and predict the future trends. 
+    Predict a particular date when the stock price will be at its high price in the current_year.
+    Make sure you find any interesting and relevant information given the current year is {current_year}.
+  expected_output: >
+    A list with 10 bullet points of the most relevant information about {topic}.
+    Predict a particular date when the stock price will be at its high price in the current_year.
+  agent: researcher
+
+
+reporting_task:
+  description: >
+    Ensure to name the report as {stock}Stock Growth Prediction Report.
+    List the stock name at the top of the report.
+    List the C-level leadership of the company.
+    List the current year at the top of the report.
+    List the stock price prediction date and price at the top of the report.
+    Review the context you got and expand each topic into a 2 line summary for a report.
+    Ensure the report is well formatted and easy to read.
+  expected_output: >
+    A fully fledged report with the main topics, each with a full section of information.
+    Formatted as markdown without '```'
+  agent: reporting_analyst
+  output_file: report.md
+
+
+
